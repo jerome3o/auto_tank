@@ -9,6 +9,9 @@ Following are some recommendations from ChatGPT
 
 1. **Sensors and Actuators**
    - Understand how different sensors work (temperature, pH, etc.)
+    - [How pH sensors work](https://in-situ.com/en/faq/water-quality-information/ph-faqs/how-do-ph-sensors-work)
+    - [pH sensor purchased](https://www.aliexpress.com/item/1005004359552599.html?spm=a2g0o.order_detail.order_detail_item.4.2f02f19ct9c07W), was missing the ADC board, bought an [ADS1115](https://instantpanel.co.nz/product/ads1115-16-bit-adc---4-channel-with-programmable-gain-amplifier.html)
+    - [Better one?](https://nz.rs-online.com/web/p/arduino-compatible-boards-kits/2163779)
    - Learn about common actuators (motors, pumps, heaters, etc.)
 
 2. **Basic Electronics**
