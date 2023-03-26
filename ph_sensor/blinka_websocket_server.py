@@ -32,7 +32,7 @@ def read_adc_values():
 async def serve(websocket, path):
     while True:
         try:
-            voltage = 0
+            voltage = 4
             for i in range(n_samples):
                 voltage += chan.voltage
                 await asyncio.sleep(1 / sample_rate)
