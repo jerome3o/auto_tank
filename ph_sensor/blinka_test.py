@@ -1,21 +1,19 @@
 import time
 import board
 import busio
-from Adafruit_ADS1x15.analog_in import AnalogIn
-from Adafruit_ADS1x15.ads1x15 import ADS1115
+import adafruit_ads1x15.ads1115 as ADS
+from adafruit_ads1x15.analog_in import AnalogIn
 
-
-# Initialize the I2C bus.
+# Create the I2C bus
 i2c = busio.I2C(board.SCL, board.SDA)
 
-# Initialize the ADC object using the ADS1115 class.
-adc = ADS1115(i2c)
+# Create the ADC object using the I2C bus
+ads = ADS.ADS1115(i2c)
 
-# Create a single-ended input on channel A0.
-chan = AnalogIn(adc, ADS1115.P0)
+# Create single-ended input on channel 0
+chan = AnalogIn(ads, ADS.P0)
 
-# Continuously print the voltage value.
+# print in a loop
 while True:
-    print("Channel A0 Voltage: {:.2f} V".format(chan.voltage))
-    time.sleep(1)
-
+    print(chan.value)
+    time.sleep(0.5)
