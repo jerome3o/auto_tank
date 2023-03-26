@@ -1,3 +1,4 @@
+import time
 from typing import List
 import asyncio
 import websockets
@@ -23,12 +24,14 @@ address = "ws://rpi2:5678"
 n_points = 100
 fig, ax = plt.subplots()
 
+_current_time = time.time()
+
 data = {
     "mean": np.zeros(n_points),
     "variance": np.zeros(n_points),
     "min": np.zeros(n_points),
     "max": np.zeros(n_points),
-    "time": np.zeros(n_points),
+    "time": np.full(n_points, _current_time),
 }
 
 lines = {
@@ -82,8 +85,10 @@ ani = FuncAnimation(fig, animate, interval=100, blit=False, init_func=init_plot)
 async def listen():
     async with websockets.connect(address) as websocket:
         while True:
+            print("Waiting for data...", end=" ")
             adc_values_str = await websocket.recv()
             adc_values = json.loads(adc_values_str)
+            print("Received: ", len(adc_values), time.time())
             adc_queue.put(adc_values)
             # sleep a bit
             await asyncio.sleep(0.05)
