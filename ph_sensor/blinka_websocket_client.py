@@ -77,6 +77,8 @@ def animate(i):
             new_values.append(adc_queue.get())
         
         update_plot(new_values)  # Update with the desired channel value
+        fig.canvas.draw_idle()
+        fig.canvas.flush_events()
 
 # Set up the animation
 ani = FuncAnimation(fig, animate, interval=100, blit=False, init_func=init_plot)
@@ -95,6 +97,7 @@ async def listen():
 
 # Show the plot and run the WebSocket listener in the same event loop
 async def main():
+
     _listener_task = asyncio.create_task(listen())  
 
     # Use asyncio.ensure_future(listen()) for Python 3.4-3.6
