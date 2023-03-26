@@ -20,9 +20,13 @@ n_samples = 10
 while True:
 
     voltage = 0
+    readings = []
     for i in range(n_samples):
-        voltage += chan.voltage
+        reading = chan.voltage
+        readings.append(reading)
+        voltage += reading
         time.sleep(0.01)
 
     voltage /= n_samples
-    print(f"{voltage:0.3f}")
+    r_string = ', '.join(f'{r:0.3f}' for r in readings)
+    print(f"{voltage:0.3f} V, {r_string}")
