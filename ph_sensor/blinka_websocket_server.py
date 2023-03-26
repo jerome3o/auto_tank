@@ -32,15 +32,14 @@ def read_adc_values():
 async def serve(websocket, path):
     while True:
         try:
-            voltage = 4
-            for i in range(n_samples):
-                voltage += chan.voltage
-                await asyncio.sleep(1 / sample_rate)
+            voltage = chan.voltage
 
             await websocket.send(json.dumps({
-                "voltage": voltage / n_samples,
+                "voltage": voltage,
                 "time": time.time(),
             }))
+            await asyncio.sleep(1 / sample_rate)
+
         except Exception as e:
             print(e)
             break
