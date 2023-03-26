@@ -11,7 +11,7 @@ address = "ws://rpi2:5678"
 
 # Set up the plot
 
-n_points = 1000
+n_points = 100
 fig, ax = plt.subplots()
 x_data = np.arange(n_points)  # Adjust this to the desired number of data points
 voltage_data = np.zeros(n_points)
@@ -52,6 +52,8 @@ async def listen():
             adc_values_str = await websocket.recv()
             adc_values = json.loads(adc_values_str)
             adc_queue.put(adc_values)
+            # sleep a bit
+            await asyncio.sleep(0.5)
 
 # Show the plot and run the WebSocket listener in the same event loop
 async def main():
