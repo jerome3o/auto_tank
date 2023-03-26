@@ -18,7 +18,7 @@ i2c = busio.I2C(board.SCL, board.SDA)
 ads = ADS.ADS1115(i2c, gain=1, mode=ADS.Mode.CONTINUOUS)
 
 # Create single-ended input on channel 0
-chan = AnalogIn(ads, ADS.P0)
+chan = AnalogIn(ads, ADS.P0, ADS.P1)
 
 
 async def serve(websocket, path):
