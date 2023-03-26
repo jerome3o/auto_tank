@@ -43,7 +43,7 @@ def animate(i):
         update_plot(new_values)  # Update with the desired channel value
 
 # Set up the animation
-ani = FuncAnimation(fig, animate, interval=50, blit=False)
+ani = FuncAnimation(fig, animate, interval=100, blit=False)
 
 # WebSocket listener
 async def listen():
@@ -53,7 +53,7 @@ async def listen():
             adc_values = json.loads(adc_values_str)
             adc_queue.put(adc_values)
             # sleep a bit
-            await asyncio.sleep(0.5)
+            await asyncio.sleep(0.05)
 
 # Show the plot and run the WebSocket listener in the same event loop
 async def main():

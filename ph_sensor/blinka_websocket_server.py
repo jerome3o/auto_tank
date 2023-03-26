@@ -8,8 +8,8 @@ import adafruit_ads1x15.ads1115 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
 
 
-n_samples = 50
-sample_rate = 250
+n_samples = 10
+sample_rate = 50
 
 # Create the I2C bus
 i2c = busio.I2C(board.SCL, board.SDA)
@@ -41,7 +41,6 @@ async def serve(websocket, path):
                 "voltage": voltage / n_samples,
                 "time": time.time(),
             }))
-            await asyncio.sleep(0.05)
         except Exception as e:
             print(e)
             break
