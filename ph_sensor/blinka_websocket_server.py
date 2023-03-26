@@ -3,7 +3,6 @@ import websockets
 import json
 import time
 import board
-import math
 import busio
 import adafruit_ads1x15.ads1115 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
@@ -24,38 +23,34 @@ chan = AnalogIn(ads, ADS.P0)
 
 async def serve(websocket, path):
     while True:
-        try:
-            readings = []
-            for i in range(n_samples):
-                readings.append(chan.voltage)
-                time.sleep(0.01)
+        readings = []
+        for i in range(n_samples):
+            readings.append(chan.voltage)
+            time.sleep(0.01)
 
-            mean = sum(readings) / len(readings)
-            variance = sum([((x - mean) ** 2) for x in readings]) / len(readings)
-            min_voltage = min(readings)
-            max_voltage = max(readings)
+        mean = sum(readings) / len(readings)
+        variance = sum([((x - mean) ** 2) for x in readings]) / len(readings)
+        min_voltage = min(readings)
+        max_voltage = max(readings)
 
-            data = {
-                "mean": mean,
-                "variance": variance,
-                "min": min_voltage,
-                "max": max_voltage,
-                "time": time.time(),
-            }
+        data = {
+            "mean": mean,
+            "variance": variance,
+            "min": min_voltage,
+            "max": max_voltage,
+            "time": time.time(),
+        }
 
-            # print data in single line
-            print(
-                f"{data['mean']:0.3f} V, "
-                f"{data['variance']:0.3f} V, "
-                f"{data['min']:0.3f} V, "
-                f"{data['max']:0.3f} V, "
-                f"{data['time']:0.3f} s"
-            )
+        # print data in single line
+        print(
+            f"{data['mean']:0.3f} V, "
+            f"{data['variance']:0.3f} V, "
+            f"{data['min']:0.3f} V, "
+            f"{data['max']:0.3f} V, "
+            f"{data['time']:0.3f} s"
+        )
 
-            await websocket.send(json.dumps(data))
-
-        except Exception as e:
-            print(e)
+        await websocket.send(json.dumps())
 
 
 start_server = websockets.serve(serve, "0.0.0.0", 5678)
