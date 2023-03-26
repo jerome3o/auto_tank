@@ -25,4 +25,4 @@ while True:
         time.sleep(0.01)
 
     voltage /= n_samples
-    print(voltage)
+    print(f"{voltage:0.3f}")
