@@ -14,7 +14,7 @@ ads = ADS.ADS1115(i2c, gain=2, mode=ADS.Mode.CONTINUOUS)
 chan = AnalogIn(ads, ADS.P2, ADS.P3)
 
 
-n_samples = 10
+n_samples = 100
 
 # print in a loop
 while True:
