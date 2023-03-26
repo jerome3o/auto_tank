@@ -11,9 +11,9 @@ i2c = busio.I2C(board.SCL, board.SDA)
 ads = ADS.ADS1115(i2c)
 
 # Create single-ended input on channel 0
-chan = AnalogIn(ads, ADS.P0)
+chan = AnalogIn(ads, ADS.P0, ADS.P1)
 
 # print in a loop
 while True:
-    print(chan.value)
+    print(chan.value, chan.voltage)
     time.sleep(0.5)
