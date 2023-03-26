@@ -28,5 +28,5 @@ while True:
         time.sleep(0.01)
 
     voltage /= n_samples
-    r_string = ', '.join(f'{r:0.3f}' for r in readings)
+    r_string = ', '.join(f'{r:0.3f}' for r in readings[:10])
     print(f"{voltage:0.3f} V, {r_string}")
