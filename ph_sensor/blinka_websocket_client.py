@@ -9,29 +9,62 @@ from matplotlib.animation import FuncAnimation
 
 address = "ws://rpi2:5678"
 
+# # Example data
+# {
+#     "mean": mean,
+#     "variance": variance,
+#     "min": min_voltage,
+#     "max": max_voltage,
+#     "time": time.time(),
+# }
+
 # Set up the plot
 
 n_points = 100
 fig, ax = plt.subplots()
-x_data = np.arange(n_points)  # Adjust this to the desired number of data points
-voltage_data = np.zeros(n_points)
-line, = ax.plot(x_data, voltage_data)
+
+data = {
+    "mean": np.zeros(n_points),
+    "variance": np.zeros(n_points),
+    "min": np.zeros(n_points),
+    "max": np.zeros(n_points),
+    "time": np.zeros(n_points),
+}
+
+lines = {
+    key: ax.plot(data["time"], data[key], label=key)[0]
+    for key in data.keys() if key != "time"
+}
+
 
 # Set up the queue
 adc_queue = queue.Queue()
 
 # Update the plot with new data
 def update_plot(adc_value: List[dict]):
-    # get all new values
-    new_values = [value["voltage"] for value in adc_value]
-    # append to the data
-    voltage_data[:-len(new_values)] = voltage_data[len(new_values):]
-    voltage_data[-len(new_values):] = new_values
+    
+    for key in data.keys():
+        # get all new values
+        new_values = [value[key] for value in adc_value]
+        # append to the data
+        data[key][:-len(new_values)] = data[key][len(new_values):]
+        data[key][-len(new_values):] = new_values
 
-    line.set_ydata(voltage_data)
+
+    for key in lines.keys():
+        lines[key].set_data(data["time"], data[key])
+
     ax.relim()
     ax.autoscale_view()
-    plt.draw()
+
+
+def init_plot():
+    ax.set_xlabel("Time (s)")
+    ax.set_ylabel("Voltage (V)")
+    ax.legend()
+
+    return lines.values()
+
 
 # Define the animation update function
 def animate(i):
@@ -43,7 +76,7 @@ def animate(i):
         update_plot(new_values)  # Update with the desired channel value
 
 # Set up the animation
-ani = FuncAnimation(fig, animate, interval=100, blit=False)
+ani = FuncAnimation(fig, animate, interval=100, blit=False, init_func=init_plot)
 
 # WebSocket listener
 async def listen():
