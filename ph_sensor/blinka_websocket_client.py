@@ -92,8 +92,10 @@ async def listen():
             adc_values = json.loads(adc_values_str)
             print("Received: ", len(adc_values), time.time())
             adc_queue.put(adc_values)
+            print("Queue size: ", adc_queue.qsize())
             # sleep a bit
             await asyncio.sleep(0.05)
+            print("finished sleep")
 
 # Show the plot and run the WebSocket listener in the same event loop
 async def main():
