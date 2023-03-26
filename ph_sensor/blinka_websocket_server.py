@@ -50,7 +50,7 @@ async def serve(websocket, path):
             f"{data['time']:0.3f} s"
         )
 
-        await websocket.send(json.dumps())
+        await websocket.send(json.dumps(data))
 
 
 start_server = websockets.serve(serve, "0.0.0.0", 5678)
