@@ -29,7 +29,7 @@ async def serve(websocket, path):
     while True:
         adc_values = read_adc_values()
         await websocket.send(json.dumps(adc_values))
-        await asyncio.sleep(0.01)
+        await asyncio.sleep(0.05)
 
 
 start_server = websockets.serve(serve, "0.0.0.0", 5678)
