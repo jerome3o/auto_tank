@@ -52,7 +52,7 @@ async def serve(websocket, path):
                 f"{data['time']:0.3f} s"
             )
 
-            await websocket.send(json.dumps())
+            await websocket.send(json.dumps(data))
 
         except Exception as e:
             print(e)
