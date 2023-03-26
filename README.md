@@ -61,5 +61,8 @@ Following are some recommendations from ChatGPT
 - SparkFun Electronics tutorials (https://learn.sparkfun.com/)
 - YouTube channels like EEVblog, GreatScott!, and Andreas Spiess
 
+## Reference Material Used
+
+* [Adafruit RPi guide](https://learn.adafruit.com/raspberry-pi-analog-to-digital-converters/ads1015-slash-ads1115)
 
 
