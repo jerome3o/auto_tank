@@ -33,6 +33,7 @@ async def serve(websocket, path):
     while True:
         try:
             voltage = chan.voltage
+            print(voltage)
 
             await websocket.send(json.dumps({
                 "voltage": voltage,
@@ -42,7 +43,6 @@ async def serve(websocket, path):
 
         except Exception as e:
             print(e)
-            break
 
 
 start_server = websockets.serve(serve, "0.0.0.0", 5678)
