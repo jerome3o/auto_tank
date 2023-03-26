@@ -11,7 +11,7 @@ from adafruit_ads1x15.analog_in import AnalogIn
 i2c = busio.I2C(board.SCL, board.SDA)
 
 # Create the ADC object using the I2C bus
-ads = ADS.ADS1115(i2c, gain=16)
+ads = ADS.ADS1115(i2c, gain=1)
 
 # Create single-ended input on channel 0
 chan = AnalogIn(ads, ADS.P0, ADS.P1)
