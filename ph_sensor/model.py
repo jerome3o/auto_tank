@@ -30,7 +30,7 @@ def load_sensors() -> Dict[str, AnalogIn]:
     i2c = busio.I2C(board.SCL, board.SDA)
 
     # Create the ADC object using the I2C bus
-    ads = ADS.ADS1115(i2c, gain=2, mode=ADS.Mode.CONTINUOUS)
+    ads = ADS.ADS1115(i2c, gain=1, mode=ADS.Mode.CONTINUOUS)
 
     # Create single-ended input on channel 0
     ph = AnalogIn(ads, ADS.P0, ADS.P1)

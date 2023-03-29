@@ -3,7 +3,7 @@ from ph_sensor.model import get_adc
 
 adc = get_adc()
 
-n_samples = 100
+n_samples = 20
 
 # print in a loop
 while True:
