@@ -19,6 +19,7 @@ matplotlib==3.7.1
 numpy==1.24.2
 packaging==23.0
 Pillow==9.4.0
+pydantic==1.10.7
 pyftdi==0.54.0
 pygls==1.0.1
 pyparsing==3.0.9
@@ -31,3 +32,4 @@ six==1.16.0
 spidev==3.6
 typeguard==2.13.3
 typing_extensions==4.5.0
+websockets==10.4
